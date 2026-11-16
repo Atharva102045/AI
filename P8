@@ -1,0 +1,29 @@
+
+import re
+
+rules = [
+    (r"\b(hello|hi|hey)\b", "Hello! How can I help you?"),
+    (r"\b(your name|who are you)\b", "I am a simple rule-based AI chatbot."),
+    (r"\bhelp\b", "You can ask about courses, lab work, or the chatbot."),
+    (r"\bthank\b", "You're welcome!"),
+]
+
+
+def reply(message):
+    msg = message.lower().strip()
+
+    for pattern, response in rules:
+        if re.search(pattern, msg):
+            return response
+
+    return "Sorry, I do not understand that yet."
+
+
+while True:
+    user = input("You: ")
+
+    if user.lower().strip() == "bye":
+        print("Bot: Goodbye!")
+        break
+
+    print("Bot:", reply(user))
